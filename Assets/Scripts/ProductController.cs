@@ -8,6 +8,7 @@ public class ProductController : MonoBehaviour {
     ProductElementController[] childrenControllers;
     public bool isComplete;
     int usedCount;
+    public int difficultyMultiplier;
 
     void Start()
     {
@@ -39,14 +40,14 @@ public class ProductController : MonoBehaviour {
     {
         if (isComplete)
         {
-            Debug.Log("Complete!!!");
-            return 10;
+            //Debug.Log("Complete!!!");
+            return 10 * difficultyMultiplier;
         }
         else
         {
-            Debug.Log("Completed : " + usedCount + " of the Total: " + childrenControllers.Length + 
-                "  And are awarded  " + ((int)((usedCount / childrenControllers.Length) * 10) - 5).ToString() + " points");
-            return (int)((usedCount * 10.0f / childrenControllers.Length)) - 5;
+            //Debug.Log("Completed : " + usedCount + " of the Total: " + childrenControllers.Length + 
+            //    "  And are awarded  " + ((int)((usedCount / childrenControllers.Length) * 10) - 5).ToString() + " points");
+            return ((int)((usedCount * 10.0f / childrenControllers.Length)) - 5) * difficultyMultiplier;
         }
     }
 }

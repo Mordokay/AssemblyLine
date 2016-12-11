@@ -14,19 +14,29 @@ public class PartElementController : MonoBehaviour
         {
             this.transform.position = placementPlace.transform.position;
         }
+        else if (isPlaced && !placementPlace)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "ProductElement")
+        if (coll.gameObject.tag == "ProductElement" && this.tag == "Cube")
         {
             if (!coll.gameObject.GetComponent<ProductElementController>().isUsed)
             {
                 canPlace = true;
                 placementPlace = coll.gameObject;
             }
-
-            //Debug.Log("Collided with the parent: " + coll.gameObject.transform.parent.gameObject.name);
+        }
+        else if (coll.gameObject.tag == "ProductElementDiamond" && this.tag == "Diamond")
+        {
+            if (!coll.gameObject.GetComponent<ProductElementController>().isUsed)
+            {
+                canPlace = true;
+                placementPlace = coll.gameObject;
+            }
         }
     }
 
@@ -39,6 +49,7 @@ public class PartElementController : MonoBehaviour
     {
         placementPlace.GetComponent<ProductElementController>().isUsed = true;
         isPlaced = true;
+        GetComponent<ParticleSystem>().Emit(50);
         placementPlace.transform.parent.gameObject.GetComponent<ProductController>().CheckComplete();
     }
 }

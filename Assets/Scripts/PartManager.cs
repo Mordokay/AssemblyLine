@@ -9,10 +9,9 @@ public class PartManager : MonoBehaviour {
     SpriteRenderer[] allChildrenSprites;
     public bool canPlace;
     public bool isPlaced;
-    Color placedColor;
 
     void Start () {
-        speed = Random.Range(0.5f, 1.5f);
+        speed = Random.Range(0.5f, 1.0f);
         allChildren = GetComponentsInChildren<PartElementController>();
         allChildrenSprites = GetComponentsInChildren<SpriteRenderer>();
     }
@@ -22,11 +21,21 @@ public class PartManager : MonoBehaviour {
         foreach (PartElementController part in allChildren)
         {
             part.PlaceElement();
+            
         }
         isPlaced = true;
     }
 
-	void Update () {
+    public void SetLayer(int order)
+    {
+        foreach (SpriteRenderer sprite in allChildrenSprites)
+        {
+            sprite.sortingOrder = order;
+
+        }
+    }
+
+    void Update () {
         
         canPlace = true;
         foreach (PartElementController part in allChildren)
@@ -56,6 +65,6 @@ public class PartManager : MonoBehaviour {
         }
         */
 
-        this.transform.Translate(Vector3.right * Time.deltaTime * speed);
+        this.transform.Translate(Vector3.down * Time.deltaTime * speed);
     }
 }

@@ -10,7 +10,7 @@ public class PartController : MonoBehaviour {
     public float timeIntervalSpawn;
 
     void Start () {
-        timeIntervalSpawn = 2.0f;
+        timeIntervalSpawn = 1.5f;
     }
 	
 	void Update () {

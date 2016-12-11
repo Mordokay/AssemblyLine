@@ -24,6 +24,7 @@ public class MouseDrag : MonoBehaviour {
         part = hit.collider.transform.parent.gameObject;
         origPos = part.transform.position;
 
+        part.GetComponent<PartManager>().SetLayer(2);
         StartCoroutine("DragObject");
     }
 
@@ -46,6 +47,7 @@ public class MouseDrag : MonoBehaviour {
             else
             {
                 part.transform.position = origPos;
+                part.GetComponent<PartManager>().SetLayer(-4);
             }
             part = null;
         }

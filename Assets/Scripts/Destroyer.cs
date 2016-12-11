@@ -19,6 +19,6 @@ public class Destroyer : MonoBehaviour {
         {
             gm.score += coll.gameObject.transform.parent.gameObject.GetComponent<ProductController>().GetScore();
         }
-        Debug.Log(coll.gameObject.transform.parent.gameObject.name + " Trigger");
+        //Debug.Log(coll.gameObject.transform.parent.gameObject.name + " Trigger");
     }
 }
