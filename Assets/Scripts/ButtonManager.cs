@@ -10,6 +10,12 @@ public class ButtonManager : MonoBehaviour {
     public GameObject pausePanel;
     public GameObject difficultyPanel;
 
+    public Sprite soundOnSprite;
+    public Sprite soundOffSprite;
+    public UnityEngine.UI.Button soundButton;
+    public AudioSource soundtrack;
+    public bool isSoundOn;
+
     public bool isPaused;
 
     void Update()
@@ -23,7 +29,9 @@ public class ButtonManager : MonoBehaviour {
 
     public void Start()
     {
-        if(menuCanvas)
+        isSoundOn = true;
+
+        if (menuCanvas)
             menuCanvas.SetActive(true);
         if(difficultyCanvas)
             difficultyCanvas.SetActive(false);
@@ -44,6 +52,23 @@ public class ButtonManager : MonoBehaviour {
         menuCanvas.SetActive(true);
         difficultyCanvas.SetActive(false);
     }
+
+    public void SwitchSound()
+    {
+        if (isSoundOn)
+        {
+            soundButton.image.overrideSprite = soundOffSprite;
+            soundtrack.Stop();
+            isSoundOn = false;
+        }
+        else
+        {
+            soundButton.image.overrideSprite = soundOnSprite;
+            soundtrack.Play();
+            isSoundOn = true;
+        }
+    }
+
 
     public void BackPanel()
     {
