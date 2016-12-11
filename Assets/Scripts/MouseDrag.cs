@@ -53,7 +53,7 @@ public class MouseDrag : MonoBehaviour {
             else
             {
                 part.transform.position = origPos;
-                part.GetComponent<PartManager>().SetLayer(-4);
+                part.GetComponent<PartManager>().SetLayer(-3);
             }
             part = null;
         }
