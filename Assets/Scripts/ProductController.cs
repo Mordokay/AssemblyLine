@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class ProductController : MonoBehaviour {
 
-    public float productMovementSpeed = 0.8f;
     ProductElementController[] childrenControllers;
     public bool isComplete;
     int usedCount;
     public int difficultyMultiplier;
+    public float difficultySpeed;
+    GameManager gm;
 
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        switch (gm.difficulty)
+        {
+            case GameManager.GameMode.easy:
+                difficultySpeed = 0.65f;
+                break;
+            case GameManager.GameMode.normal:
+                difficultySpeed = 0.55f;
+                break;
+            case GameManager.GameMode.hard:
+                difficultySpeed = 0.4f;
+                break;
+        }
         childrenControllers = GetComponentsInChildren<ProductElementController>();
     }
 
 	void Update () {
-        this.transform.Translate(Vector3.right * Time.deltaTime * productMovementSpeed);
+        this.transform.Translate(Vector3.right * Time.deltaTime * difficultySpeed);
     }
 
     public void CheckComplete()
@@ -40,13 +54,10 @@ public class ProductController : MonoBehaviour {
     {
         if (isComplete)
         {
-            //Debug.Log("Complete!!!");
             return 10 * difficultyMultiplier;
         }
         else
         {
-            //Debug.Log("Completed : " + usedCount + " of the Total: " + childrenControllers.Length + 
-            //    "  And are awarded  " + ((int)((usedCount / childrenControllers.Length) * 10) - 5).ToString() + " points");
             return ((int)((usedCount * 10.0f / childrenControllers.Length)) - 5) * difficultyMultiplier;
         }
     }

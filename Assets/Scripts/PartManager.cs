@@ -11,7 +11,8 @@ public class PartManager : MonoBehaviour {
     public bool isPlaced;
 
     void Start () {
-        speed = Random.Range(0.5f, 1.0f);
+        //speed = Random.Range(0.5f, 1.0f);
+        speed = 0.8f;
         allChildren = GetComponentsInChildren<PartElementController>();
         allChildrenSprites = GetComponentsInChildren<SpriteRenderer>();
     }

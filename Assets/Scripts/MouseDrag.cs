@@ -7,10 +7,16 @@ public class MouseDrag : MonoBehaviour {
     Vector3 origPos, curMousePos;
     GameObject part;
     public LayerMask dragLayers;
+    public ButtonManager bm;
+
+    void Start()
+    {
+        bm = this.GetComponent<ButtonManager>();
+    }
 
 	void Update () {
         // Make sure the user pressed the mouse down
-        if (!Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0) || bm.isPaused)
             return;
 
 

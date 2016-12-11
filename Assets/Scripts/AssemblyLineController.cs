@@ -10,8 +10,6 @@ public class AssemblyLineController : MonoBehaviour {
     public float timeBetweenSpawns;
 
     void Start () {
-        timeBetweenSpawns = 13.0f;
-
         time = 0.0f;
         GameObject myProduct = Instantiate(products[Random.Range(0, products.Length)]) as GameObject;
         myProduct.transform.position = spawnPos.position;
