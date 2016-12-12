@@ -9,7 +9,7 @@ public class MouseDrag : MonoBehaviour {
     public LayerMask dragLayers;
     ButtonManager bm;
     public AudioSource lockSound;
-    public GameManager gm;
+    GameManager gm;
 
     void Start()
     {
