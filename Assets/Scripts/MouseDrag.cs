@@ -7,16 +7,18 @@ public class MouseDrag : MonoBehaviour {
     Vector3 origPos, curMousePos;
     GameObject part;
     public LayerMask dragLayers;
-    public ButtonManager bm;
+    ButtonManager bm;
+    public AudioSource lockSound;
+    public GameManager gm;
 
     void Start()
     {
+        gm = this.GetComponent<GameManager>();
         bm = this.GetComponent<ButtonManager>();
     }
 
 	void Update () {
-        // Make sure the user pressed the mouse down
-        if (!Input.GetMouseButtonDown(0) || bm.isPaused)
+        if (!Input.GetMouseButtonDown(0) || bm.isPaused || gm.lostGame)
             return;
 
 
@@ -40,7 +42,6 @@ public class MouseDrag : MonoBehaviour {
         {
             Vector3 newMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
             part.transform.position = new Vector3(newMousePos.x, newMousePos.y, 0.0f);
-            //Debug.Log("Dragging banana");
 
             yield return 0;
         }
@@ -49,6 +50,7 @@ public class MouseDrag : MonoBehaviour {
             if (part.GetComponent<PartManager>().canPlace)
             {
                 part.GetComponent<PartManager>().Place();
+                lockSound.Play();
             }
             else
             {

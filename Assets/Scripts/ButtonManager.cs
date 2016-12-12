@@ -9,6 +9,7 @@ public class ButtonManager : MonoBehaviour {
     public GameObject difficultyCanvas;
     public GameObject pausePanel;
     public GameObject difficultyPanel;
+    public GameObject losePanel;
 
     public Sprite soundOnSprite;
     public Sprite soundOffSprite;
@@ -39,6 +40,8 @@ public class ButtonManager : MonoBehaviour {
             pausePanel.SetActive(false);
         if(difficultyPanel)
             difficultyPanel.SetActive(false);
+        if (losePanel)
+            losePanel.SetActive(false);
         isPaused = false;
     }
 
@@ -96,18 +99,21 @@ public class ButtonManager : MonoBehaviour {
 
     public void Pause()
     {
-        if (isPaused)
+        if (!losePanel.activeSelf)
         {
-            pausePanel.SetActive(false);
-            difficultyPanel.SetActive(false);
-            Time.timeScale = 1.0f;
-            isPaused = false;
-        }
-        else
-        {
-            pausePanel.SetActive(true);
-            Time.timeScale = 0.0f;
-            isPaused = true;
+            if (isPaused)
+            {
+                pausePanel.SetActive(false);
+                difficultyPanel.SetActive(false);
+                Time.timeScale = 1.0f;
+                isPaused = false;
+            }
+            else
+            {
+                pausePanel.SetActive(true);
+                Time.timeScale = 0.0f;
+                isPaused = true;
+            }
         }
     }
 
